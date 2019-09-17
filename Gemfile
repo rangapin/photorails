@@ -63,6 +63,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'carrierwave'
 gem 'figaro'
-gem 'fog'
+gem 'activestorage'
 gem 'mini_magick'
 gem 'unf'
+gem "aws-sdk-s3", require: false
+
+
