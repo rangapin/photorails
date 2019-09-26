@@ -61,11 +61,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'activestorage'
+gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
 gem 'figaro'
-gem 'activestorage'
 gem 'mini_magick'
 gem 'unf'
-gem "aws-sdk-s3", require: false
-
-

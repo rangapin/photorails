@@ -1,10 +1,20 @@
+# encoding: utf-8
+
 class PhotoUploader < CarrierWave::Uploader::Base
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
-    include Sprockets::Rails::Helper
+  include CarrierWave::MiniMagick
+
+  # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
+  # include Sprockets::Helpers::RailsHelper
+  # include Sprockets::Helpers::IsolatedHelper
+
+  # Include the sprockets-rails helper for Rails 4+ asset pipeline compatibility:
+  include Sprockets::Rails::Helper
+
   # Choose what kind of storage to use for this uploader:
-  #storage :file
+  # storage :file
   storage :activestorage
 
   # Override the directory where uploaded files will be stored.
@@ -14,30 +24,37 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
+  # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  #   # asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
   # Process files as they are uploaded:
-  # process scale: [200, 300]
+  #process :resize_to_fill => [200, 200]
   #
   # def scale(width, height)
   #   # do something
   # end
-  version :tiny do
-  process resize_to_fill: [20, 20]
+
   # Create different versions of your uploaded files:
+  version :tiny do
+    process :resize_to_fill => [20, 20]
+  end
+
   version :profile_size do
-  process resize_to_fit: [300, 300]
+    process :resize_to_fill => [300, 300]
+  end
+
+  # version :full_size do
+  #   process :resize_to_fill => [700, 700]
   # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_whitelist
-  %w(jpg jpeg gif png)
+  def extension_white_list
+    %w(jpg jpeg gif png)
   end
 
   # Override the filename of the uploaded files:
@@ -45,5 +62,5 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-end
 
+end
